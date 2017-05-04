@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>02加速运动（自由落体）</title>
+	<style>
+		body{background-color: #000;}
+		#ball{position:absolute;width:100px;}
+	</style>
+	<script>
+		document.addEventListener('DOMContentLoaded',()=>{
+			var ball = document.querySelector('#ball');
+
+			// 垂直速度（加速）
+			var vspeed = 0;
+
+			// 水平速度（匀速）
+			var hspeed = 30;
+			var timer = setInterval(()=>{
+				// 先获取当前的top值
+				var top = ball.offsetTop;
+
+				vspeed += 5;
+
+				top += vspeed;
+
+				if(top >= window.innerHeight-ball.offsetHeight){
+					clearInterval(timer);
+					top = window.innerHeight-ball.offsetHeight;
+				}
+
+				ball.style.top = top + 'px';
+				ball.style.left = ball.offsetLeft + hspeed + 'px';
+
+			},30)
+		})
+	</script>
+</head>
+<body>
+	<img src="img/basketball.jpg" id="ball">
+</body>
+</html>
