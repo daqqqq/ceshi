@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>02加速运动（自由落体）</title>
+	<style>
+		#meinv{opacity:0.5;}
+		/*#meinv:hover{opacity: 1;}*/
+	</style>
+	<script>
+		document.addEventListener('DOMContentLoaded',()=>{
+			var meinv = document.querySelector('#meinv');
+
+			var timer;
+			meinv.onmouseenter = ()=>{
+				// 获取当前透明度
+				var opacity = getComputedStyle(meinv).opacity*1;console.log(opacity)
+
+				// 添加定时器前，先清除之前的定时器
+				// 防止多个定时器作用于一个元素
+				clearInterval(timer);
+				timer = setInterval(()=>{
+					opacity += 0.1;
+
+					if(opacity >= 1){
+						clearInterval(timer);
+						opacity = 1;
+					}
+					meinv.style.opacity = opacity;
+				},50)
+			}
+
+
+			meinv.onmouseleave = ()=>{
+				// 获取当前透明度
+				var opacity = getComputedStyle(meinv).opacity*1;
+
+
+				clearInterval(timer);
+				timer = setInterval(()=>{
+					opacity -= 0.1;
+
+					if(opacity <= 0.5){
+						clearInterval(timer);
+						opacity = 0.5;
+					}
+					meinv.style.opacity = opacity;
+				},50)
+			}
+		})
+	</script>
+</head>
+<body>
+	<img src="img/g3.jpg" id="meinv">
+</body>
+</html>
